@@ -92,7 +92,8 @@ function getDistanceBetweenPoints(x1, y1, x2, y2) {
  *   5*x = 0         => 0
  */
 function getLinearEquationRoot(a, b) {
-    return (-b)/a
+    if(b === 0) return 0;
+    return -b/a ;
 }
 
 
@@ -212,8 +213,9 @@ function roundToPowerOfTen(num, pow) {
  */
 function isPrime(n) {
     for (let i = 2; i < n; i++) {
-        if (n % i == 0)
+        if (n % i === 0)
             return false;
+        
     }
 
     return true;

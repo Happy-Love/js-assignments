@@ -96,7 +96,7 @@ function getArrayOfPositives(arr) {
  */
 function getArrayOfStrings(arr) {
    return arr.filter(elem => {
-      return typeof elem == 'string';
+      return typeof elem === 'string';
   })
 }
 
@@ -181,7 +181,7 @@ function insertItem(arr, item, index) {
  *    [ 'a', 'b', 'c', 'd'], 3  => [ 'a', 'b', 'c' ]
  */
 function getHead(arr, n) {
-   return arr.slice(0, n);;
+   return arr.slice(0, n);
 }
 
 
@@ -262,7 +262,7 @@ function toArrayOfSquares(arr) {
 function getMovingSum(arr) {
    let start;
    return arr.map((elem, index) => {
-       if (index == 0) {
+       if (index === 0) {
            start = elem;
            return elem;
        }
@@ -286,7 +286,7 @@ function getMovingSum(arr) {
 function getSecondItems(arr) {
    let array = [];
    arr.filter((elem, index) => {
-       if (index % 2 != 0)
+       if (index % 2 !== 0)
            array.push(elem);
    });
    return array;
@@ -495,7 +495,7 @@ function sortCitiesArray(arr) {
 function getIdentityMatrix(n) {
    return Array.from({length:n}, (x,i) =>
    Array.from({length:n}, (y,j) => 
-   (i==j) ? 1 : 0)
+   (i===j) ? 1 : 0)
    );
 }
 
@@ -528,7 +528,7 @@ function getIntervalArray(start, end) {
  *   [ 1, 1, 2, 2, 3, 3, 4, 4] => [ 1, 2, 3, 4]
  */
 function distinct(arr) {
-  return arr.filter((x, i, arr) => arr.indexOf(x) == i);
+  return arr.filter((x, i, arr) => arr.indexOf(x) === i);
 }
 
 /**
@@ -633,11 +633,10 @@ function swapHeadAndTail(arr) {
    let length = arr.length,
    result = [];
 
-   if (length % 2 == 0) {
-   return result.concat(arr.slice(length / 2, length), arr.slice(0, length / 2))
-   } else {
-   return result.concat(arr.slice(length / 2 + 1, length), arr[parseInt(length / 2, 10)], arr.slice(0, length / 2))
-   }
+   if (length % 2 === 0) 
+      return result.concat(arr.slice(length / 2, length), arr.slice(0, length / 2)); 
+   return result.concat(arr.slice(length / 2 + 1, length), arr[parseInt(length / 2, 10)], arr.slice(0, length / 2));
+   
 
 }
 
