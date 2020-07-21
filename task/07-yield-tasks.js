@@ -134,18 +134,16 @@ function* depthTraversalTree(root) {
  *
  */
 function* breadthTraversalTree(root) {
-    let nodes = [root],
-    index = 0;
-
+    let nodes = [root], index = 0;
     while ((nodes.length - index) > 0) {
-    let n = nodes[index];
-    yield n;
-    if(n.children){
-        for (let i of n.children) {
+        let n = nodes[index];
+        yield n;
+        if(n.children){
+            for (let i of n.children) {
             nodes.push(i);                
+            }
         }
-    }
-    index++;
+        index++;
     }
 }
 
@@ -168,10 +166,9 @@ function* mergeSortedSequences(source1, source2) {
     source1 = source1();
     source2 = source2();
 
-    while (true) {
+    while (!source1.done || !source2.done) {
         let s1 = source1.next();
         let s2 = source2.next();
-
         if(s1.done) yield s2.value;
         else if(s2.done) yield s1.value;
         else yield * [s1.value, s2.value].sort((a,b) => {return a-b});
