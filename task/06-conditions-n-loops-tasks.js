@@ -50,18 +50,13 @@ function getFizzBuzz(num) {
  */
 
 function getFactorial(n) {
-    
-    function factorialize(num) {
-        if (num === 0 || num === 1)
-          return 1;
-        for (let i = num - 1; i >= 1; i--) {
-          num *= i;
-        }
-        return num;
+    // Status OK (1)
+    if (n === 0 || n === 1)
+      return 1;
+    for (let i = n - 1; i >= 1; i--) {
+       n *= i;
     }
-
-    let value=factorialize(n);
-    return value;
+    return n;
 }
 
 
@@ -314,13 +309,14 @@ function isCreditCardNumber(ccn) {
  *   10000 ( 1+0+0+0+0 = 1 ) => 1
  *   165536 (1+6+5+5+3+6 = 26,  2+6 = 8) => 8
  */
-function getDigitalRoot(num) {
+function getDigitalRoot(num){
+    //(fixed)
     if (num < 9) 
-    return num ;
+        return num;
     let sum = 0;
-    while (num > 0) {
-    sum += num % 10;
-    num = parseInt(num/10);
+    while (num > 0){
+        sum += num % 10;
+        num = parseInt(num/10);
     } 
     return getDigitalRoot(sum);
 }
@@ -538,40 +534,25 @@ function evaluateTicTacToePosition(position) {
         [11,21,31], [12,22,32], [13,23,33],
         [11,22,33], [13,22,31]
     ];
+    // Привет Алекс, не универсально но грубо говоря я скоротил решение на половину узнав выигрышные координаты заранее.
+    // Какая логика?
+    // Проверяем заранее известные координаты победы.
+    // 11 12 13
+    // Логика проверки
+    // Каждый раз нам придётся сверять по 3 отметки, если хотя бы 1 из комбинации является выигрышной значит это победа одного из маркеров
     let n = 3;
-
-    function transformMatrix(position, symb) {
-        let arr = [];
-        for(let i = 1; i <= n; i++){
-            for(let j = 1; j <= n; j++) {
-                winCoords[i][j] === arr[j];
-                if (position[i-1][j-1] === symb)
-                    arr.push(Number(i.toString() + j));
-            }
+    let firstLetter="";
+    for(let i=0;i<winCoords.length;i++){
+        let mark=0;
+        firstLetter=position[Number(winCoords[i][0].toString()[0])-1][Number(winCoords[i][0].toString()[1])-1];
+        if(firstLetter===undefined || firstLetter===null || firstLetter==='' || firstLetter===' ') continue;
+        for (let j = 0; j < winCoords[i].length; j++) {
+            if(position[Number(winCoords[i][j].toString()[0])-1][Number(winCoords[i][j].toString()[1])-1]===firstLetter)
+               mark++;   
         }
-        return arr;   
+        if(mark===3)
+            return firstLetter;
     }
-
-    function isWin(arr, symb) {
-       for (let i = 0; i < winCoords.length; i++) {
-           let truth = 0;
-           for (let j = 0; j < n; j++) {
-                for (let k = 0; k < arr.length; k++ ) {
-                    if ( winCoords[i][j] === arr[k])
-                        truth += 1    
-                }
-           }
-           if (truth === 3) return symb; 
-       }
-    return false;    
-    }
-
-    let arr = transformMatrix(position, 'X');
-    if (isWin(arr, 'X')) return isWin(arr, 'X'); 
-    
-    arr = transformMatrix(position, '0');
-    if (isWin(arr, '0')) return isWin(arr, '0');
-
     return undefined;
 }
 
