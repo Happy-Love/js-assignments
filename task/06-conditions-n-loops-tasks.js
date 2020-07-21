@@ -545,7 +545,7 @@ function evaluateTicTacToePosition(position) {
     for(let i=0;i<winCoords.length;i++){
         let mark=0;
         firstLetter=position[Number(winCoords[i][0].toString()[0])-1][Number(winCoords[i][0].toString()[1])-1];
-        if(firstLetter===undefined || firstLetter===null || firstLetter==='' || firstLetter===' ') continue;
+        if(firstLetter === undefined || firstLetter===null || firstLetter==='' || firstLetter===' ') continue;
         for (let j = 0; j < winCoords[i].length; j++) {
             if(position[Number(winCoords[i][j].toString()[0])-1][Number(winCoords[i][j].toString()[1])-1]===firstLetter)
                mark++;   
