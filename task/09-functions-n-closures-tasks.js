@@ -113,7 +113,7 @@ function memoize(func) {
  */
 function retry(func, attempts) {
     return () => {
-        for(;;) 
+        for(let tries=0;tries<=attempts;tries++) 
         {
             try 
             {
@@ -121,12 +121,11 @@ function retry(func, attempts) {
             } 
             catch (error) 
             {
-                if (--attempts < 0) {
-                    throw error;
-                }
+                continue;
             }
         }
-    }
+        func();
+    };
 }
 
 
