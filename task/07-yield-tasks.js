@@ -134,7 +134,8 @@ function* depthTraversalTree(root) {
  *
  */
 function* breadthTraversalTree(root) {
-    let nodes = [root], index = 0;
+    let nodes = [root];
+    let index = 0;
     while ((nodes.length - index) > 0) {
         let n = nodes[index];
         yield n;
@@ -162,10 +163,8 @@ function* breadthTraversalTree(root) {
  *   [ 1, 3, 5, ... ], [ -1 ] => [ -1, 1, 3, 5, ...]
  */
 function* mergeSortedSequences(source1, source2) {
-   
     source1 = source1();
     source2 = source2();
-
     while (!source1.done || !source2.done) {
         let s1 = source1.next();
         let s2 = source2.next();
