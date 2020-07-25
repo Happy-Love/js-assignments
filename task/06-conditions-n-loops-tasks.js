@@ -358,7 +358,9 @@ function isBracketsBalanced(str) {
             continue;
         }
         
-        if (open.indexOf(arr.pop()) !== close.indexOf(str[i]))  return false;
+        if (open.indexOf(arr.pop()) !== close.indexOf(str[i])) {
+            return false;
+        }
     }
     
     return !arr.length;
