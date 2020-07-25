@@ -50,13 +50,13 @@ function getFizzBuzz(num) {
  */
 
 function getFactorial(n) {
-    // Status OK (1)
-    if (n === 0 || n === 1)
-      return 1;
-    for (let i = n - 1; i >= 1; i--) {
-       n *= i;
+    let result = 1;
+
+    for (let i = 1; i <= n ; i++) {
+        result *= i;
     }
-    return n;
+
+    return result;
 }
 
 
@@ -310,14 +310,18 @@ function isCreditCardNumber(ccn) {
  *   165536 (1+6+5+5+3+6 = 26,  2+6 = 8) => 8
  */
 function getDigitalRoot(num){
-    //(fixed)
-    if (num < 9) 
+    
+    if (num < 9) { 
         return num;
+    }
+
     let sum = 0;
+
     while (num > 0){
         sum += num % 10;
         num = parseInt(num/10);
     } 
+
     return getDigitalRoot(sum);
 }
 
@@ -351,7 +355,7 @@ function isBracketsBalanced(str) {
     for (let i = 0; i < str.length; i++) {     
         if (open.indexOf(str[i]) !== -1) {
             arr.push(str[i]);
-            continue
+            continue;
         }
         
         if (open.indexOf(arr.pop()) !== close.indexOf(str[i]))  return false;
@@ -411,6 +415,7 @@ function timespanToHumanString(startDate, endDate) {
     if (delta <= 45 * day) return 'a month ago';
     if (delta <= 345 * day) return `${myRound(delta / month)} months ago`;
     if (delta <= 545 * day) return 'a year ago';
+
     return `${myRound(delta / year)} years ago`;
 }
 
@@ -453,6 +458,7 @@ function toNaryString(num, n) {
  */
 function getCommonDirectoryPath(pathes) {
     let out;
+
     for (let i = 0; i < pathes[0].length; i++ ) {
         for (let j = 1; j < pathes.length; j++) {
             if (pathes[0].charAt(i) !== pathes[j].charAt(i)) {
@@ -461,6 +467,7 @@ function getCommonDirectoryPath(pathes) {
             }             
         }
     }
+
 }
 
 
@@ -484,6 +491,7 @@ function getCommonDirectoryPath(pathes) {
  */
 function getMatrixProduct(m1, m2) {
     let result = [];
+
     for (let i = 0; i < m1.length; i++) {
         result[i] = [];
         for (let j = 0; j < m2[0].length; j++) {
@@ -494,6 +502,7 @@ function getMatrixProduct(m1, m2) {
             result[i][j] = sum;
         }
     }
+
     return result;
 }
 
@@ -529,30 +538,38 @@ function getMatrixProduct(m1, m2) {
  *
  */
 function evaluateTicTacToePosition(position) {
+    // It is better not to write anything next time
     let winCoords = [
-        [11,12,13], [21,22,23], [31,32,33],
-        [11,21,31], [12,22,32], [13,23,33],
-        [11,22,33], [13,22,31]
+        [[0,0],[0,1],[0,2]],
+        [[1,0],[1,1],[1,2]],
+        [[2,0],[2,1],[2,2]],
+        [[0,0],[1,0],[2,0]],
+        [[0,1],[1,1],[2,1]],
+        [[0,2],[1,2],[2,2]],
+        [[0,0],[1,1],[2,2]],
+        [[0,2],[1,1],[2,0]] 
     ];
-    // Привет Алекс, не универсально но грубо говоря я скоротил решение на половину узнав выигрышные координаты заранее.
-    // Какая логика?
-    // Проверяем заранее известные координаты победы.
-    // 11 12 13
-    // Логика проверки
-    // Каждый раз нам придётся сверять по 3 отметки, если хотя бы 1 из комбинации является выигрышной значит это победа одного из маркеров
     let n = 3;
     let firstLetter="";
-    for(let i=0;i<winCoords.length;i++){
+
+    for (let i=0;i<winCoords.length;i++){
         let mark=0;
-        firstLetter=position[Number(winCoords[i][0].toString()[0])-1][Number(winCoords[i][0].toString()[1])-1];
-        if(firstLetter === undefined || firstLetter===null || firstLetter==='' || firstLetter===' ') continue;
+        firstLetter=position[winCoords[i][0][0]][winCoords[i][0][1]];
+        
+        if (firstLetter === undefined || firstLetter===null || firstLetter==='' || firstLetter===' ') continue;
+        
         for (let j = 0; j < winCoords[i].length; j++) {
-            if(position[Number(winCoords[i][j].toString()[0])-1][Number(winCoords[i][j].toString()[1])-1]===firstLetter)
-               mark++;   
+            if(position[winCoords[i][j][0]][winCoords[i][j][1]]===firstLetter) {
+                mark++;   
+            }
         }
-        if(mark===3)
+        
+        if (mark===3) {
             return firstLetter;
+        }
+
     }
+
     return undefined;
 }
 
